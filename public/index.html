@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saludo Personalizado</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; padding: 20px;}
+        input, button {padding: 8px; margin: 5px 0;}
+        #mensaje {margin-top: 10px; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h1> ingresa tu nombre</h1>
+    <input type="text" id="nombreInput" placeholder="Nombre"/>
+    <button onclick="obtenerSaludo()">Saludar</button>
+    <div id="obtenerMensaje"></div>
+
+<script>
+    function obtenerSaludo() {
+    const nombre = document.getElementById('nombreInput').value
+    fetch(`http://localhost:3000/saludo/${nombre}`)
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('obtenerMensaje').textContent = data;
+        })
+        .catch(error => {
+            document.getElementById('obtenerMensaje').textContent = "Error al obtener el saludo";
+        })
+}
+</script>
+</body>
+</html>
